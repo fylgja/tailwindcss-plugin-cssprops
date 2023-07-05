@@ -1,4 +1,4 @@
-# Fylgja - TailwindCSS CSSProps Plugin
+# Fylgja - TailwindCSS Plugin CSSProps
 
 [![NPM version](https://img.shields.io/npm/v/@fylgja/tailwindcss-plugin-cssprops?style=flat-square)](https://www.npmjs.org/package/@fylgja/tailwindcss-plugin-cssprops)
 ![license](https://img.shields.io/github/license/fylgja/tailwindcss-plugin-cssprops?color=%23234&style=flat-square)
