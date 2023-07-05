@@ -13,60 +13,60 @@ With this plugin, you can effortlessly manage your CSS variables using design to
 npm install @fylgja/tailwindcss-plugin-cssprops
 ```
 
-## How to use
+## How to Use
 
-Add the plugin to your tailwind.config.js file:
+1. Add the plugin to your `tailwind.config.js` file:
 
 ```js
 module.exports = {
   theme: {
     extend: {
-        // ...
+      // ...
     }
   },
   plugins: [
     require('@fylgja/tailwindcss-plugin-cssprops')({
-        tokens: {
-            colors: {
-                primary: "200 50% 50%" // HSL color syntax
-            },
-        },
-    }),
-  ],
-}
-```
-
-Also make sure to add your the tokens to the plugin options.
-
-Now you can use the tokens like ny CSS vairbale in your frontend.
-
-To take it a step futere you can also add this to your TailwindCSS colors;
-
-```js
-module.exports = {
-  theme: {
-    extend: {
+      tokens: {
         colors: {
-            primary: {
-                DEFAULT: "hsl(var(--color-primary) / <alpha-value>)",
-            }
-        }
-    }
-  },
-  plugins: [
-    require('@fylgja/tailwindcss-plugin-cssprops')({
-        tokens: {
-            colors: {
-                primary: {
-                    DEFAULT: "200 50% 50%" // HSL color syntax
-                }
-            },
+          primary: "200 50% 50%" // HSL color syntax
         },
+      },
     }),
   ],
 }
 ```
 
-so you can use it as `bg-primary`.
+2. Ensure that you add your tokens to the plugin options.
 
-For more information on how to use CSS variables in TailwindCSS see the [TailwindCSS docs on using-css-variables](https://tailwindcss.com/docs/customizing-colors#using-css-variables)
+3. Now you can use the tokens as CSS variables in your frontend.
+
+To take it a step further, you can also add your tokens to TailwindCSS colors:
+
+```js
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        primary: {
+          DEFAULT: "hsl(var(--color-primary) / <alpha-value>)",
+        }
+      }
+    }
+  },
+  plugins: [
+    require('@fylgja/tailwindcss-plugin-cssprops')({
+      tokens: {
+        colors: {
+          primary: {
+            DEFAULT: "200 50% 50%" // HSL color syntax
+          }
+        },
+      },
+    }),
+  ],
+}
+```
+
+Now you can use it as `bg-primary`.
+
+For more information on how to use CSS variables in TailwindCSS, refer to the [TailwindCSS docs on using CSS variables](https://tailwindcss.com/docs/customizing-colors#using-css-variables).
