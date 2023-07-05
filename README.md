@@ -27,7 +27,7 @@ module.exports = {
   plugins: [
     require('@fylgja/tailwindcss-plugin-cssprops')({
       tokens: {
-        colors: {
+        color: {
           primary: {
             DEFAULT: "200 50% 50%" // HSL color syntax
           }
@@ -50,7 +50,7 @@ const colors = require("@fylgja/colors/hsl");
 module.exports = {
   theme: {
     extend: {
-      colors: {
+      color: {
         primary: {
           DEFAULT: "hsl(var(--color-primary) / <alpha-value>)",
         }
@@ -60,7 +60,7 @@ module.exports = {
   plugins: [
     require('@fylgja/tailwindcss-plugin-cssprops')({
       tokens: {
-        colors: {
+        color: {
           primary: {
             DEFAULT: colors.purple[8],
           },
@@ -91,14 +91,14 @@ module.exports = {
   plugins: [
     require('@fylgja/tailwindcss-plugin-cssprops')({
       tokens: {
-        colors: {
+        color: {
           primary: {
             DEFAULT: "200 50% 50%" // HSL color syntax
           },
           "primary-@media:dark": {
             DEFAULT: "200 50% 50%" // HSL color syntax
           },
-          // Or use a wrapper as long as the media key is part of the group key, like "colors"
+          // Or use a wrapper as long as the media key is part of the group key, like "color"
           "@media:dark": {
             primary: {
               DEFAULT: "200 50% 50%" // HSL color syntax
