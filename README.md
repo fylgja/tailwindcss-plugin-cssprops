@@ -111,6 +111,8 @@ module.exports = {
 }
 ```
 
+> This follows the same syntax used in [PostCSS-Jit-Props](https://github.com/GoogleChromeLabs/postcss-jit-props)
+
 If you prefer to use a different class or selector, you can configure it using the `darkmode` option:
 
 ```js
