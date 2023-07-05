@@ -1,0 +1,32 @@
+{
+  "name": "@fylgja/tailwindcss-plugin-cssprops",
+  "version": "1.0.0",
+  "description": "A Tailwind CSS plugin for automatically adding CSS Variables to your CSS from the Tailwind Config",
+  "homepage": "https://fylgja.dev/",
+  "repository": "https://github.com/fylgja/tailwindcss-plugin-cssprops",
+  "bugs": "https://github.com/fylgja/tailwindcss-plugin-cssprops/issues",
+  "author": "Fylgja",
+  "license": "MIT",
+  "main": "index.js",
+  "unpkg": "index.js",
+  "keywords": [
+    "fylgja",
+    "css",
+    "design-tokens",
+    "css-props",
+    "css-variables"
+  ],
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "test": "npx tailwindcss -c ./tests/tailwind.config.js -i ./tests/input.css -o ./tests/output.css"
+  },
+  "peerDependencies": {
+    "tailwindcss": ">=3.0.0"
+  },
+  "devDependencies": {
+    "@fylgja/colors": "^2.0.0-beta.4",
+    "tailwindcss": "^3.3.2"
+  }
+}
