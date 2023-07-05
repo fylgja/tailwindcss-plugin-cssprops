@@ -7,20 +7,20 @@ const plugin = require("tailwindcss/plugin");
  * @returns Object - flattened object
  */
 const flattenObj = (obj, separator = "-") => {
-  let result = {};
+    let result = {};
 
-  for (const i in obj) {
-    if (typeof obj[i] === "object" && !Array.isArray(obj[i])) {
-      const temp = flattenObj(obj[i]);
-      for (const j in temp) {
-        result[i + separator + j] = temp[j];
-      }
-    } else {
-      result[i] = obj[i];
+    for (const i in obj) {
+        if (typeof obj[i] === "object" && !Array.isArray(obj[i])) {
+            const temp = flattenObj(obj[i]);
+            for (const j in temp) {
+                result[i + separator + j] = temp[j];
+            }
+        } else {
+            result[i] = obj[i];
+        }
     }
-  }
 
-  return result;
+    return result;
 };
 
 /**
@@ -30,7 +30,7 @@ const flattenObj = (obj, separator = "-") => {
  * @returns {string} kebab case string
  */
 function kebabCase(string) {
-  return string.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
+    return string.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
 }
 
 /**
@@ -41,40 +41,40 @@ function kebabCase(string) {
  * @returns {string}
  */
 const toJsStyleTokens = (props) => {
-  let styles = {};
-  let stylesDark = {};
+    let styles = {};
+    let stylesDark = {};
 
-  Object.entries(props).forEach(([name, value]) => {
-    if (typeof value === "string" || typeof value === "number") {
-    } else if (Array.isArray(value)) {
-      value = value.toString();
-    } else {
-      return console.warn(`Value of ${name} is not a string or number.`);
-    }
+    Object.entries(props).forEach(([name, value]) => {
+        if (typeof value === "string" || typeof value === "number") {
+        } else if (Array.isArray(value)) {
+            value = value.toString();
+        } else {
+            return console.warn(`Value of ${name} is not a string or number.`);
+        }
 
-    name = kebabCase(name);
+        name = kebabCase(name);
 
-    if (name.endsWith("-default")) {
-      name = name.replace("-default", "");
-    }
+        if (name.endsWith("-default")) {
+            name = name.replace("-default", "");
+        }
 
-    let varName = `--${name}`;
-    if (name.includes("-@media:dark")) {
-      varName = varName.replace("-@media:dark", "");
-    }
+        let varName = `--${name}`;
+        if (name.includes("-@media:dark")) {
+            varName = varName.replace("-@media:dark", "");
+        }
 
-    if (name.includes("-@media:dark")) {
-      stylesDark = { ...stylesDark, [varName]: value };
-      return;
-    } else {
-      styles = { ...styles, [varName]: value };
-    }
-  });
+        if (name.includes("-@media:dark")) {
+            stylesDark = { ...stylesDark, [varName]: value };
+            return;
+        } else {
+            styles = { ...styles, [varName]: value };
+        }
+    });
 
-  return {
-    styles,
-    stylesDark,
-  };
+    return {
+        styles,
+        stylesDark,
+    };
 };
 
 /**
@@ -84,24 +84,25 @@ const toJsStyleTokens = (props) => {
  * @param {string|boolean} options.darkMode - the selector to use for dark mode or disable it with false
  * @returns
  */
-function autoTokens({
-  tokens,
-  darkMode = "@media (prefers-color-scheme: dark)",
+function convertToCSSProps({
+    tokens,
+    darkMode = "@media (prefers-color-scheme: dark)",
+    wrapper = ":root",
 } = {}) {
-  if (!tokens) return;
-  const { styles, stylesDark } = toJsStyleTokens(flattenObj(tokens));
+    if (!tokens) return;
+    const { styles, stylesDark } = toJsStyleTokens(flattenObj(tokens));
 
-  return function ({ addBase }) {
-    addBase({ ":root": { ...styles } });
+    return function ({ addBase }) {
+        addBase({ [wrapper]: { ...styles } });
 
-    if (darkMode && Object.keys(stylesDark).length) {
-      if (darkMode.startsWith("@media")) {
-        addBase({ [darkMode]: { ":root": { ...stylesDark } } });
-      } else {
-        addBase({ [darkMode]: { ...stylesDark } });
-      }
-    }
-  };
+        if (darkMode && Object.keys(stylesDark).length) {
+            if (darkMode.startsWith("@media")) {
+                addBase({ [darkMode]: { [wrapper]: { ...stylesDark } } });
+            } else {
+                addBase({ [darkMode]: { ...stylesDark } });
+            }
+        }
+    };
 }
 
-module.exports = plugin.withOptions(autoTokens);
+module.exports = plugin.withOptions(convertToCSSProps);
