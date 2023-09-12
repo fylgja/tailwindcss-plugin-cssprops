@@ -23,7 +23,7 @@
     "test": "npx tailwindcss -c ./tests/tailwind.config.js -i ./tests/input.css -o ./tests/output.css"
   },
   "peerDependencies": {
-    "tailwindcss": ">=3.0.0"
+    "tailwindcss": ">=2.0.0"
   },
   "devDependencies": {
     "@fylgja/colors": "^2.0.0-beta.4",
